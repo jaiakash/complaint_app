@@ -1,0 +1,81 @@
+name: Bug Report
+description: Report a bug related to the Flutter app with Firebase backend.
+labels:
+  - "bug"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        :warning: **Before submitting, please check the existing issues and FAQ to avoid duplicates!**  
+        - **Common Firebase Errors:** [Firebase Docs](https://firebase.google.com/docs)  
+        - **FlutterFire Issues:** [FlutterFire GitHub](https://github.com/firebase/flutterfire/issues)  
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: Provide a clear and concise description of the issue.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: Provide step-by-step instructions to reproduce the issue.
+      placeholder: |
+        1. Open the app
+        2. Perform action XYZ
+        3. See the error
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen.
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: Describe what actually happened.
+  - type: textarea
+    attributes:
+      label: Error Logs / Console Output
+      description: |
+        If applicable, paste relevant error logs or Firebase crash reports.
+      placeholder: |
+        ```bash
+        Paste error logs here
+        ```
+  - type: textarea
+    attributes:
+      label: Screenshots / Screen Recording
+      description: Attach any screenshots or recordings that illustrate the issue.
+  - type: input
+    attributes:
+      label: App Version
+      description: Mention the app version where this bug was found.
+      placeholder: "e.g., v1.2.3"
+  - type: input
+    attributes:
+      label: Flutter Version
+      description: Run `flutter --version` and paste the output.
+      placeholder: "e.g., Flutter 3.0.5 • Dart 2.17.6"
+  - type: input
+    attributes:
+      label: Firebase Services Used
+      description: List the Firebase services in use (Auth, Firestore, Storage, etc.).
+      placeholder: "e.g., Firebase Auth, Firestore, Firebase Messaging"
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Add any other context, such as platform-specific issues (Android/iOS).
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### **Firebase & Flutter Common Issues**
+        
+        #### **Q: I get a `[firebase_auth/invalid-credential]` error**
+        **Ans:** Check if your Google Sign-In API is enabled in Firebase Console.
+
+        #### **Q: Firestore rules are preventing data access**
+        **Ans:** Review your Firestore security rules in Firebase Console.
+
+        #### **Q: My Firebase push notifications don’t work**
+        **Ans:** Make sure FCM is set up properly, and check logs for errors.
+
+        For more troubleshooting, visit [FlutterFire Documentation](https://firebase.flutter.dev/docs/).
