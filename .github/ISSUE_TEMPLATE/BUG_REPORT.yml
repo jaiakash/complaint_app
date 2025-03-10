@@ -37,9 +37,7 @@ body:
       description: |
         If applicable, paste relevant error logs or Firebase crash reports.
       placeholder: |
-        ```bash
         Paste error logs here
-        ```
   - type: textarea
     attributes:
       label: Screenshots / Screen Recording

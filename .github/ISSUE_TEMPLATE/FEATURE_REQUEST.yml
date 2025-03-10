@@ -1,0 +1,50 @@
+name: Feature Request
+description: Suggest a new feature or improvement for the Flutter app using Firebase.
+labels:
+  - "enhancement"
+body:
+  - type: textarea
+    attributes:
+      label: Is your feature request related to a problem? Please describe.
+      description: >
+        A clear and concise description of what the problem is.  
+        Example: "I'm always frustrated when [...]"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the solution you'd like
+      description: >
+        Provide a detailed explanation of how this feature should work.  
+        If applicable, mention how it integrates with Firebase services (e.g., Firestore, Auth, Storage).
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe alternatives you've considered
+      description: >
+        List any alternative solutions or workarounds you've tried or considered.
+  - type: dropdown
+    attributes:
+      label: Which Firebase services does this feature involve?
+      description: Select the Firebase services related to this feature.
+      multiple: true
+      options:
+        - Firebase Auth
+        - Firestore
+        - Firebase Storage
+        - Firebase Cloud Messaging (FCM)
+        - Firebase Analytics
+        - Firebase Remote Config
+        - Firebase Functions
+        - Other (Specify in Additional Context)
+  - type: input
+    attributes:
+      label: Platform
+      description: Specify whether this is for Android, iOS, Web, or all.
+      placeholder: "e.g., Android & iOS"
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: >
+        Add any other relevant details, mockups, or screenshots to support your request.
