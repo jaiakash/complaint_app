@@ -14,7 +14,12 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
+  <meta name="google-signin-client_id" content="95738155674-3nddo4111603ttsqsbmrmvrnk10pbdsi.apps.googleusercontent.com" />
+
   <base href="$FLUTTER_BASE_HREF">
+
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="unsafe-none" />
+
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -31,8 +36,33 @@
 
   <title>complaint_app</title>
   <link rel="manifest" href="manifest.json">
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDbvCzD5FNBuBw0eCLA-nr4Hu5qnAu3OCo",
+    authDomain: "complaint-app-1a1e4.firebaseapp.com",
+    projectId: "complaint-app-1a1e4",
+    storageBucket: "complaint-app-1a1e4.appspot.com",
+    messagingSenderId: "95738155674",
+    appId: "1:95738155674:web:27ed0b51f737e3e1b68523"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+</script>
+
 </head>
 <body>
+
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  </script>
+  
 </body>
 </html>
