@@ -55,19 +55,3 @@ body:
       options:
         - 'Yes'
         - 'No'
-  - type: markdown
-    attributes:
-      value: |
-        ---
-        ### **Firebase & Flutter Common Issues**
-        
-        #### **Q: I get a `[firebase_auth/invalid-credential]` error**
-        **Ans:** Check if your Google Sign-In API is enabled in Firebase Console.
-
-        #### **Q: Firestore rules are preventing data access**
-        **Ans:** Review your Firestore security rules in Firebase Console.
-
-        #### **Q: My Firebase push notifications don’t work**
-        **Ans:** Make sure FCM is set up properly, and check logs for errors.
-
-        For more troubleshooting, visit [FlutterFire Documentation](https://firebase.flutter.dev/docs/).
