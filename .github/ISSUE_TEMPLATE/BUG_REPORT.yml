@@ -53,8 +53,8 @@ body:
       description: Select whether you would like to work on this issue
       multiple: false
       options:
-        - Yes
-        - No
+        - 'Yes'
+        - 'No'
   - type: markdown
     attributes:
       value: |
