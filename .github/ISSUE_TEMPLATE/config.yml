@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Issues
+    url: https://github.com/jaiakash/complaint_app/issues
+    about:
+      Before opening a bug report, please check the issues to avoid duplicates!
