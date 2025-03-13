@@ -43,6 +43,14 @@ body:
       label: Platform
       description: Specify whether this is for Android, iOS, Web, or all.
       placeholder: "e.g., Android & iOS"
+  - type: dropdown
+    attributes:
+      label: Would you like to work on this issue?
+      description: Select whether you would like to work on this issue
+      multiple: false
+      options:
+        - Yes
+        - No
   - type: textarea
     attributes:
       label: Additional Context

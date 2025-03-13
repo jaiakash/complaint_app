@@ -6,9 +6,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        :warning: **Before submitting, please check the existing issues and FAQ to avoid duplicates!**  
+        :warning: **Before submitting, please check the existing issues and FAQ to avoid duplicates!** 
+        - **Common Flutter Issues:** [Flutter Docs](https://docs.flutter.dev/) 
         - **Common Firebase Errors:** [Firebase Docs](https://firebase.google.com/docs)  
-        - **FlutterFire Issues:** [FlutterFire GitHub](https://github.com/firebase/flutterfire/issues)  
   - type: textarea
     attributes:
       label: Describe the bug
@@ -44,23 +44,17 @@ body:
       description: Attach any screenshots or recordings that illustrate the issue.
   - type: input
     attributes:
-      label: App Version
-      description: Mention the app version where this bug was found.
-      placeholder: "e.g., v1.2.3"
-  - type: input
-    attributes:
-      label: Flutter Version
-      description: Run `flutter --version` and paste the output.
-      placeholder: "e.g., Flutter 3.0.5 • Dart 2.17.6"
-  - type: input
-    attributes:
       label: Firebase Services Used
       description: List the Firebase services in use (Auth, Firestore, Storage, etc.).
       placeholder: "e.g., Firebase Auth, Firestore, Firebase Messaging"
-  - type: textarea
+  - type: dropdown
     attributes:
-      label: Additional Context
-      description: Add any other context, such as platform-specific issues (Android/iOS).
+      label: Would you like to work on this issue?
+      description: Select whether you would like to work on this issue
+      multiple: false
+      options:
+        - Yes
+        - No
   - type: markdown
     attributes:
       value: |
