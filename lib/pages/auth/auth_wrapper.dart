@@ -3,7 +3,6 @@ import 'package:complaint_app/pages/auth/sign_in_page.dart';
 import 'package:complaint_app/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:complaint_app/services/auth/auth_service.dart';
 
@@ -34,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
 // Auth wrapper to manage auth state
 class AuthWrapper extends StatelessWidget {
-  const AuthWrapper({Key? key}) : super(key: key);
+  const AuthWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class AuthWrapper extends StatelessWidget {
           if (user == null) {
             return const AuthScreen();
           }
-          return const HomeScreen(); // Replace with your home screen
+          return const HomeScreen();
         }
         
         // Show loading screen while checking auth state
