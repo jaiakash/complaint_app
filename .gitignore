@@ -31,6 +31,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
+.vscode/
 /build/
 
 # Symbolication related
@@ -43,3 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/app/google-services.json
+
+/lib/firebase_options.dart
+
+firebase.json
