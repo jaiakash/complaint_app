@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,31 +17,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final AuthService _authService = AuthService();
 
   bool _isLoading = false;
-  String? _errorMessage;
 
-  Future<void> _signInWithGoogle() async {
+  Future<void> _signUpWithGoogle() async {
     setState(() {
       _isLoading = true;
-      _errorMessage = null;
     });
 
-    try {
-      await _authService.signInWithGoogle();
+    // Call signInWithGoogle and await the result
+    final userCredential = await _authService.signInWithGoogle();
 
+    setState(() {
+      _isLoading = false;
+    });
+
+    // If sign-up is successful (non-null UserCredential)
+    if (userCredential != null) {
       // Navigate to home screen
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/home');
       }
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+    } else {
+      // Show error message
+      Fluttertoast.showToast(
+          msg: 'Failed to sign up with Google',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
     }
   }
 
@@ -75,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // Google sign-up button
                 OutlinedButton.icon(
-                  onPressed: _isLoading ? null : _signInWithGoogle,
+                  onPressed: _isLoading ? null : _signUpWithGoogle,
                   icon: const Icon(FontAwesomeIcons.google, color: Colors.red),
                   label: const Text('Sign up with Google'),
                   style: OutlinedButton.styleFrom(
@@ -83,17 +84,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Error message
-                if (_errorMessage != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Text(
-                      _errorMessage!,
-                      style: const TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
 
                 // Sign in link
                 Row(

@@ -15,7 +15,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool _isSignIn = true;
+  bool _isSignIn = false;
 
   void _toggleAuth() {
     setState(() {

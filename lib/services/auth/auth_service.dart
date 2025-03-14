@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -11,13 +14,17 @@ class AuthService {
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   // Sign in with Google
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
       if (googleUser == null) {
-        throw Exception('Google sign in aborted');
+        _handleAuthException(FirebaseAuthException(
+          code: 'sign-in-aborted',
+          message: 'Google sign in aborted',
+        ));
+        return null; // Return null if the user cancels sign-in
       }
 
       // Obtain the auth details from the request
@@ -30,19 +37,31 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
 
-      // Sign in with the credential
+      // Sign in with the credential and return the result
       return await _auth.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
-      throw _handleAuthException(e);
+      _handleAuthException(e);
+      return null; // Return null in case of an error
     } catch (e) {
-      throw Exception('Failed to sign in with Google: ${e.toString()}');
+      _handleAuthException(FirebaseAuthException(
+        code: 'unknown-error',
+        message: 'Failed to sign in with Google: ${e.toString()}',
+      ));
+      return null; // Return null in case of an unknown error
     }
   }
 
   // Sign out
   Future<void> signOut() async {
-    await _googleSignIn.signOut();
-    await _auth.signOut();
+    try {
+      await _googleSignIn.signOut();
+      await _auth.signOut();
+    } catch (e) {
+      _handleAuthException(FirebaseAuthException(
+        code: 'sign-out-error',
+        message: 'Failed to sign out: ${e.toString()}',
+      ));
+    }
   }
 
   // Password reset
@@ -50,32 +69,59 @@ class AuthService {
     try {
       await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw _handleAuthException(e);
+      _handleAuthException(e);
     }
   }
 
   // Handle Firebase auth exceptions
-  Exception _handleAuthException(FirebaseAuthException e) {
+  void _handleAuthException(FirebaseAuthException e) {
     print('Firebase Auth Error: ${e.code} - ${e.message}');
 
+    String message;
     switch (e.code) {
       case 'user-not-found':
-        return Exception('No user found with this email.');
+        message = 'No user found with this email.';
+        break;
       case 'wrong-password':
-        return Exception('Incorrect password.');
+        message = 'Incorrect password.';
+        break;
       case 'email-already-in-use':
-        return Exception('This email is already registered.');
+        message = 'This email is already registered.';
+        break;
       case 'weak-password':
-        return Exception('Password is too weak.');
+        message = 'Password is too weak.';
+        break;
       case 'invalid-email':
-        return Exception('Invalid email format.');
+        message = 'Invalid email format.';
+        break;
       case 'operation-not-allowed':
-        return Exception('This sign-in method is not enabled.');
+        message = 'This sign-in method is not enabled.';
+        break;
       case 'account-exists-with-different-credential':
-        return Exception(
-            'An account already exists with the same email address but different sign-in credentials.');
+        message = 'An account already exists with the same email address but different sign-in credentials.';
+        break;
+      case 'sign-in-aborted':
+        message = 'Google sign in aborted.';
+        break;
+      case 'sign-out-error':
+        message = 'Failed to sign out.';
+        break;
+      case 'unknown-error':
+        message = e.message ?? 'An unknown error occurred.';
+        break;
       default:
-        return Exception('An error occurred. Please try again.');
+        message = 'An error occurred. Please try again.';
     }
+
+    // Show toast message
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
   }
 }

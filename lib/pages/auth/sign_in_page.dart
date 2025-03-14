@@ -1,5 +1,6 @@
 import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,31 +17,31 @@ class _SignInScreenState extends State<SignInScreen> {
   final AuthService _authService = AuthService();
 
   bool _isLoading = false;
-  String? _errorMessage;
 
   Future<void> _signInWithGoogle() async {
     setState(() {
       _isLoading = true;
-      _errorMessage = null;
     });
 
-    try {
-      await _authService.signInWithGoogle();
+    // Call signInWithGoogle and await the result
+    final userCredential = await _authService.signInWithGoogle();
 
+    setState(() {
+      _isLoading = false;
+    });
+
+    // If sign-in is successful (non-null UserCredential)
+    if (userCredential != null) {
       // Navigate to home screen
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/home');
       }
-    } catch (e) {
-      setState(() {
-        _errorMessage = e.toString();
-      });
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-      }
+    } else {
+      // Show error message
+      Fluttertoast.showToast(
+          msg: 'Failed to sign in with Google',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
     }
   }
 
