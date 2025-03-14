@@ -7,6 +7,8 @@
 .history
 .svn/
 migrate_working_dir/
+android/app/google-services.json
+
 
 # IDE / Editor Specific
 .idea/
