@@ -13,7 +13,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  /// ✅ Function to send OTP
+  /// Function to send OTP
   void sendOTP() async {
     String phoneNumber = "+91" + _phoneController.text.trim(); // Adjust country code if needed
 
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /// ✅ Function to check if user is logged in
+  /// Function to check if user is logged in
   void checkLoginStatus() {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  /// ✅ Function to sign out
+  /// Function to sign out
   Future<void> signOut() async {
     await _auth.signOut();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ✅ Google Sign-In Button
+            // Google Sign-In Button
             ElevatedButton(
               onPressed: () async {
                 var user = await authService.signInWithGoogle();
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 20),
 
-            // ✅ Phone Login Text Field
+            // Phone Login Text Field
             TextField(
               controller: _phoneController,
               keyboardType: TextInputType.phone,
@@ -103,21 +103,21 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 10),
 
-            // ✅ Send OTP Button
+            // Send OTP Button
             ElevatedButton(
               onPressed: sendOTP,
               child: Text("Send OTP"),
             ),
             SizedBox(height: 20),
 
-            // ✅ Check Login Status
+            // Check Login Status
             ElevatedButton(
               onPressed: checkLoginStatus,
               child: Text("Check Login Status"),
             ),
             SizedBox(height: 20),
 
-            // ✅ Sign Out Button
+            // Sign Out Button
             ElevatedButton(
               onPressed: signOut,
               child: Text("Sign Out"),
