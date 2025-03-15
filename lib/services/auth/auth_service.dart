@@ -51,6 +51,45 @@ class AuthService {
     }
   }
 
+  // 🔹 SEND OTP FOR PHONE AUTHENTICATION
+  Future<void> sendOTP(
+      String phoneNumber, void Function(String, int?) codeSent) async {
+    try {
+      await _auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        timeout: const Duration(seconds: 60),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await _auth.signInWithCredential(credential);
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          _handleAuthException(e);
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          codeSent(verificationId, resendToken);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+    } on FirebaseAuthException catch (e) {
+      _handleAuthException(e);
+    }
+  }
+
+  // 🔹 VERIFY OTP
+  Future<UserCredential?> verifyOTP(String verificationId, String smsCode) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+
+      return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      _handleAuthException(e);
+      return null;
+    }
+  }
+
+
   // Sign out
   Future<void> signOut() async {
     try {

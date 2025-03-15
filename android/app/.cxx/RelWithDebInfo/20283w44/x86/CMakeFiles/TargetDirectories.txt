@@ -1,0 +1,2 @@
+C:/Users/mahia/codepeak/complaint_app/android/app/.cxx/RelWithDebInfo/20283w44/x86/CMakeFiles/edit_cache.dir
+C:/Users/mahia/codepeak/complaint_app/android/app/.cxx/RelWithDebInfo/20283w44/x86/CMakeFiles/rebuild_cache.dir
