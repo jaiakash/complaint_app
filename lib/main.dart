@@ -1,13 +1,12 @@
 import 'package:complaint_app/firebase_options.dart';
 import 'package:complaint_app/pages/auth/auth_wrapper.dart';
 import 'package:complaint_app/pages/home/home_page.dart';
+// import 'package:complaint_app/pages/auth/phone_auth_screen.dart';
+// import 'package:complaint_app/pages/auth/auth_screen.dart' as auth_screen;
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart'; // Import generated Firebase options
-import 'screens/login_screen.dart';
-import 'screens/otp_screen.dart';
-import 'screens/home_screen.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,6 +35,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => const AuthScreen(),
         '/home': (context) => const HomeScreen(),
+        // "/phone-auth": (context) => const PhoneAuthScreen(),
       },
     );
   }
