@@ -1,8 +1,6 @@
 import 'package:complaint_app/firebase_options.dart';
 import 'package:complaint_app/pages/auth/auth_wrapper.dart';
 import 'package:complaint_app/pages/home/home_page.dart';
-// import 'package:complaint_app/pages/auth/phone_auth_screen.dart';
-// import 'package:complaint_app/pages/auth/auth_screen.dart' as auth_screen;
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +33,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/auth': (context) => const AuthScreen(),
         '/home': (context) => const HomeScreen(),
-        // "/phone-auth": (context) => const PhoneAuthScreen(),
       },
     );
   }

@@ -78,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 OutlinedButton.icon(
                   onPressed: _isLoading ? null : _signInWithGoogle,
                   icon: const Icon(FontAwesomeIcons.google, color: Colors.red),
-                  label: const Text('Sign in with Google'),
+                  label: const Text('Sign in with GOOgle'),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
