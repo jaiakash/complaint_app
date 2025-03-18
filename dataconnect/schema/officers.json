@@ -1,0 +1,12 @@
+{
+    "officerId": "officer001",
+    "name": "Officer Smith",
+    "email": "officer.smith@example.com",
+    "phone": "+1987654321",
+    "department": "Public Safety",
+    "badgeNumber": "PS-12345",
+    "assignedComplaints": ["complaint001", "complaint002"], 
+    "createdAt": "2025-03-18T09:00:00Z",
+    "profilePic": "https://link-to-profile-pic.jpg"
+  }
+  

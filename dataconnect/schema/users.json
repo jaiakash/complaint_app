@@ -1,0 +1,11 @@
+{
+    "userId": "uid123",
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "phone": "+1234567890",
+    "address": "123 Main St",
+    "createdAt": "2025-03-18T10:00:00Z",
+    "profilePic": "https://link-to-profile-pic.jpg",
+    "role": "user"        
+  }
+  
