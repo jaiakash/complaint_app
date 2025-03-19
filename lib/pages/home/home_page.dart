@@ -2,6 +2,10 @@ import 'package:complaint_app/pages/auth/auth_wrapper.dart';
 import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:complaint_app/services/auth/auth_service.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -25,13 +29,17 @@ class HomeScreen extends StatelessWidget {
     // Mock data for regular users
     final bool userCanSearch =
         true; // Whether the user can search for a department
+    
+    // Get user details
+    String displayName = user?.displayName ?? "No username";
+    String email = user?.email ?? "No email";
+    String phoneNumber = user?.phoneNumber ?? "No phone number";
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Home',
-          style: GoogleFonts.poppins(),
-        ),
+        title: const Text(
+          'Home', 
+          style: GoogleFonts.poppins(),),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -53,11 +61,15 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'User: ${user?.displayName ?? 'No username'}',
+              'User: ${displayName}',
               style: GoogleFonts.nunito(fontSize: 18),
             ),
             Text(
-              'Email: ${user?.email ?? 'No email'}',
+              'Email: ${email}',
+              style: GoogleFonts.nunito(fontSize: 18),
+            ),
+            Text(
+              'Phone Number: ${phoneNumber}',
               style: GoogleFonts.nunito(fontSize: 18),
             ),
             const SizedBox(height: 40),
@@ -160,6 +172,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ],
+
           ],
         ),
       ),

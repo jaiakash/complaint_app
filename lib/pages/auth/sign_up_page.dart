@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:complaint_app/pages/auth/otp_verification_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onSignInPressed;
@@ -15,9 +16,59 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final AuthService _authService = AuthService();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
 
   bool _isLoading = false;
+  bool _otpSent = false;
+  String? _verificationId;
 
+
+
+  // Send OTP for Phone Authentication
+  Future<void> _sendOTP() async {
+    String phoneNumber = "+91${_phoneController.text.trim()}"; // Adjust country code if needed
+    setState(() => _isLoading = true);
+
+    await _authService.sendOTP(phoneNumber, (String verificationId, int? resendToken) {
+      setState(() {
+        _verificationId = verificationId;
+        _otpSent = true;
+        _isLoading = false;
+      });
+      Fluttertoast.showToast(msg: "OTP Sent!");
+
+      // Navigate to OTP Verification Screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => OTPVerificationScreen(verificationId: _verificationId!), 
+      ),
+    );
+    });
+  }
+
+  //Verify OTP
+  Future<void> _verifyOTP() async {
+    if (_verificationId == null) return;
+    setState(() => _isLoading = true);
+
+    final userCredential = await _authService.verifyOTP(
+      _verificationId!,
+      _otpController.text.trim(),
+    );
+
+    setState(() => _isLoading = false);
+
+    if (userCredential != null && mounted) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      Fluttertoast.showToast(msg: "Invalid OTP");
+    }
+  }
+
+
+  //sign up with google
   Future<void> _signUpWithGoogle() async {
     setState(() {
       _isLoading = true;
@@ -74,6 +125,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 30),
 
+                //Phone Number Input
+                TextField(
+                  controller: _phoneController,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    labelText: 'Phone Number',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Send OTP Button / OTP Input Field
+                _otpSent
+                    ? TextField(
+                        controller: _otpController,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'Enter OTP',
+                          border: OutlineInputBorder(),
+                        ),
+                      )
+                    : OutlinedButton(
+                        onPressed: _isLoading ? null : _sendOTP,
+                        child: const Text('Send OTP'),
+                      ),
+                const SizedBox(height: 16),
+
+                //Verify OTP Button
+                _otpSent
+                    ? ElevatedButton(
+                        onPressed: _isLoading ? null : _verifyOTP,
+                        child: _isLoading ? const CircularProgressIndicator() : const Text('Verify OTP'),
+                      )
+                    : const SizedBox(),
+
+                const SizedBox(height: 16),
+                const Text('Or', textAlign: TextAlign.center),
+                const SizedBox(height: 16),
+
+
                 // Google sign-up button
                 OutlinedButton.icon(
                   onPressed: _isLoading ? null : _signUpWithGoogle,
@@ -103,4 +194,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
+ }
 }

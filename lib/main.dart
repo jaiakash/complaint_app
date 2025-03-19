@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/userComplaints': (context) => UserComplaintsPage(),
         '/assignedComplaints': (context) => OfficerComplaintsPage(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }
