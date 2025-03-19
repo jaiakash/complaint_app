@@ -31,10 +31,30 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        //Implementing SMS_RETRIEVER_API
+        <!-- Implementing SMS_RETRIEVER_API -->
         <meta-data
         android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVER_API"
         android:value="true"/>
+
+        <!--> Enabling Firebase Cloud Messaging -->
+
+            <service
+        android:name=".MyFirebaseMessagingService"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+        </intent-filter>
+    </service>
+
+    <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+        android:exported="true"
+        android:permission="com.google.android.c2dm.permission.SEND">
+        <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <category android:name="${applicationId}" />
+        </intent-filter>
+    </receiver>
+
         
     </application>
     <!-- Required to query activities that can process text, see:
