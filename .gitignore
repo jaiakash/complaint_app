@@ -7,7 +7,6 @@
 .history
 .svn/
 migrate_working_dir/
-node_modules/
 
 # IDE / Editor Specific
 .idea/
