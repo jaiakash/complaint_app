@@ -28,7 +28,7 @@ This app allows users to log in, submit complaints, and ensure real-time communi
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
+   git clone https://github.com/jaiakash/complaint_app.git
    ```
 
 2. Install dependencies:
@@ -38,7 +38,8 @@ This app allows users to log in, submit complaints, and ensure real-time communi
 
 3. Set up Firebase:
 
-   - Create a Firebase project. Follow these three main steps to establish your Firebase project
+   - Go to the [Firebase Console]()
+   - Click on "Add Project" and follow the on-screen instructions to create a Flutter project. The steps would look similar to the ones shown below.
 
      | Step 1 | Step 2 | Step 3 |
      | ------ | ------ | ------ |
@@ -51,23 +52,8 @@ This app allows users to log in, submit complaints, and ensure real-time communi
       The configuration upon success gives you all the Firebase App IDs that you can use.
      ![Flutterfire config success](https://github.com/user-attachments/assets/e55e1e4a-f161-4a48-a90a-8ba1b7312b38)
 
-   - Set up Firebase Realtime Database for complaints, authentication with providers like Google Account and Phone Number providers. You can visit your Firebase project to enable them:
-      ![Authentication Screen and Providers](https://github.com/user-attachments/assets/1f205aaa-6179-4e67-8a59-36e623e80f97)
-
-   - At the last, make sure whichever service you are using, it has the proper fingerprint of your app to authorize the providers/services of your Firebaese project. For example, Authentication via Google Account requires the SHA1 and SHA256 keys of your Flutter app before you can use the authentication service. Hence, ensure that you use your fingerprints correctly. In case of Android, these keys can be found via the following command: Within your `/android` directory execute the following command - `./gradlew signingReport` to obtain your SHA keys
-      Execute the command:
-      ![Command to generate keys](https://github.com/user-attachments/assets/3745c98e-d578-4267-a08a-143f0df40e96)
-
-      Result of execution:
-      ![Obtained keys](https://github.com/user-attachments/assets/7ef7e907-3cda-4801-b347-77bdbbb29242)
-
-      Now, paste the same keys into your authentication provider:
-      ![Setup key](https://github.com/user-attachments/assets/178c060d-4342-40b5-bb1a-d5b582d26c00)
-
-   - Finally, you will be able to use the Firebase services via your own project. Do not forget to visit [Flutterfire Setup](https://firebase.google.com/docs/flutter/setup) to understand the setup process in greater details and different platforms!
-
-
-
+   - With Firebase config in your project completed, you would still need some specific setup for authenticating the Firebase services. For more details, check the [Setup.md](/Setup.md)
+   - With the necessary setup completed, you may now be able to use Firebase services and enable them for running the application.
 
 4. Run the app:
    ```bash
