@@ -88,7 +88,6 @@ class AuthService {
       return null;
     }
   }
-
   // Sign out
   Future<void> signOut() async {
     try {
