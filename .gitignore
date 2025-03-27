@@ -48,6 +48,7 @@ macos/.symlinks/
 windows/.dart_tool/
 linux/.dart_tool/
 web/.dart_tool/
+web/firebase-messaging-sw.js
 
 # Firebase
 /lib/firebase_options.dart
