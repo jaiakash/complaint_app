@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(MaterialApp(home: OfficerComplaintsPage()));
-}
-
 class OfficerComplaintsPage extends StatelessWidget {
   final List<Map<String, String>> assignedComplaints = [
     {"title": "Pothole on Main Road", "status": "Pending"},
@@ -22,158 +18,103 @@ class OfficerComplaintsPage extends StatelessWidget {
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.blue,
         centerTitle: true,
+        elevation: 0,
       ),
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FaIcon(FontAwesomeIcons.user, size: 50)),
-                Column(
-                  children: [
-                    Text(
-                      "Officer Name",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    Text(
-                      "Designation",
-                      style: TextStyle(color: Colors.grey[700]),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.grey,
-                            )
-                          ],
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.grey[300],
+                  child: FaIcon(FontAwesomeIcons.user,
+                      size: 30, color: Colors.black87),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Officer Name",
+                          style: GoogleFonts.nunito(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                      Text("Designation",
+                          style: GoogleFonts.nunito(color: Colors.grey[700])),
+                      SizedBox(height: 8),
+                      Row(
+                        children: List.generate(
+                          5,
+                          (index) => Icon(
+                            Icons.star,
+                            color: index < 4 ? Colors.yellow : Colors.grey,
+                            size: 20,
+                          ),
                         ),
-                        IconButton.filled(
-                            onPressed: () {}, icon: Icon(Icons.edit))
-                      ],
-                    ),
-                  ],
-                )
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.logout, color: Colors.red),
+                ),
               ],
             ),
           ),
-
           Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 24,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: TextField(
               decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey[200],
+                prefixIcon: Icon(Icons.search, color: Colors.grey[700]),
+                hintText: "Search complaints...",
+                hintStyle: GoogleFonts.nunito(color: Colors.grey[600]),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide.none,
                 ),
-                filled: true,
-                hintFadeDuration: Duration(milliseconds: 400),
-                fillColor: Colors.grey[200],
-                prefixIcon: Icon(Icons.search, color: Colors.grey[700]),
-                hintText: "Search Complaints",
-                hintStyle: TextStyle(color: Colors.grey[700]),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FilledButton(
-                  onPressed: () {},
-                  style: FilledButton.styleFrom(backgroundColor: Colors.blue),
-                  child: Text("Completed"),
-                ),
-                FilledButton(onPressed: () {}, child: Text("Pending"))
-              ],
-            ),
-          ),
+          SizedBox(height: 12),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               itemCount: assignedComplaints.length,
               itemBuilder: (context, index) {
                 return Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   margin: EdgeInsets.only(bottom: 12),
-                  elevation: 4,
+                  elevation: 3,
                   child: ListTile(
-                    leading: Icon(Icons.security, color: Colors.blue, size: 40),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    leading: Icon(Icons.report, color: Colors.blue, size: 40),
                     title: Text(
                       assignedComplaints[index]["title"]!,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
                       "Status: ${assignedComplaints[index]["status"]}",
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: GoogleFonts.nunito(
+                          color:
+                              assignedComplaints[index]["status"] == "Pending"
+                                  ? Colors.red
+                                  : Colors.green),
                     ),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to reply page
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                      child: Text("Reply"),
-                    ),
+                    trailing:
+                        Icon(Icons.chevron_right, color: Colors.blue, size: 30),
+                    onTap: () {},
                   ),
                 );
               },
             ),
           ),
-          // Container(
-          //   padding: EdgeInsets.all(16),
-          //   child: ElevatedButton.icon(
-          //     onPressed: () {
-          //       // Navigate to complaint registration page
-          //     },
-          //     icon: Icon(Icons.add, size: 24),
-          //     label: Text("Add Complaint", style: TextStyle(fontSize: 18)),
-          //     style: ElevatedButton.styleFrom(
-          //       backgroundColor: Colors.blue,
-          //       foregroundColor: Colors.white,
-          //       shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(30)),
-          //       padding: EdgeInsets.symmetric(vertical: 12),
-          //       minimumSize: Size(double.infinity, 50),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

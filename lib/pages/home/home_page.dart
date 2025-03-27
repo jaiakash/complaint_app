@@ -6,7 +6,6 @@ import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -16,7 +15,7 @@ class HomeScreen extends StatelessWidget {
     final AuthService _authService = AuthService();
 
     // Simulate a role for the user (you can replace this with actual user role info)
-    final String userRole = 'user'; // Example role: 'officer' or 'user'
+    final String userRole = 'officer'; // Example role: 'officer' or 'user'
 
     // Mock data for officers
     final int assignedComplaints =
@@ -29,7 +28,7 @@ class HomeScreen extends StatelessWidget {
     // Mock data for regular users
     final bool userCanSearch =
         true; // Whether the user can search for a department
-    
+
     // Get user details
     String displayName = user?.displayName ?? "No username";
     String email = user?.email ?? "No email";
@@ -37,9 +36,10 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Home', 
-          style: GoogleFonts.poppins(),),
+        title: Text(
+          'Home',
+          style: GoogleFonts.poppins(),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -172,7 +172,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ],
-
           ],
         ),
       ),
