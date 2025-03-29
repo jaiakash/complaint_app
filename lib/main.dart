@@ -1,6 +1,8 @@
 import 'package:complaint_app/firebase_options.dart';
 import 'package:complaint_app/pages/auth/auth_wrapper.dart';
 import 'package:complaint_app/pages/home/home_page.dart';
+import 'package:complaint_app/pages/landing/officer_view_page.dart';
+import 'package:complaint_app/pages/landing/user_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
       home: const AuthWrapper(),
       routes: {
         '/auth': (context) => const AuthScreen(),
+        '/home': (context) => HomeScreen(),
+        '/userComplaints': (context) => UserComplaintsPage(),
+        '/assignedComplaints': (context) => OfficerComplaintsPage(),
         '/home': (context) => const HomeScreen(),
       },
     );

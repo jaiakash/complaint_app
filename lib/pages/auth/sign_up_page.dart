@@ -5,7 +5,6 @@ import 'package:complaint_app/services/auth/auth_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:complaint_app/pages/auth/otp_verification_screen.dart';
 
-
 class SignUpScreen extends StatefulWidget {
   final Function() onSignInPressed;
 
@@ -126,8 +125,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 30),
 
-
-
                 //Phone Number Input
                 TextField(
                   controller: _phoneController,
@@ -197,4 +194,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-}
+ }
