@@ -1,0 +1,68 @@
+{
+  "admins": {
+    "admin001": {
+      "name": "Super Admin",
+      "email": "admin@example.com",
+      "phone": "+1122334455",
+      "role": "super_admin",
+      "createdAt": "2025-03-18T08:00:00Z",
+      "profilePic": "https://link-to-profile-pic.jpg"
+    }
+  },
+  "users": {
+    "uid123": {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "phone": "+1234567890",
+      "address": "123 Main St",
+      "createdAt": "2025-03-18T10:00:00Z",
+      "profilePic": "https://link-to-profile-pic.jpg",
+      "role": "user"
+    }
+  },
+  "officers": {
+    "officer001": {
+      "name": "Officer Smith",
+      "email": "officer.smith@example.com",
+      "phone": "+1987654321",
+      "department": "Public Safety",
+      "badgeNumber": "PS-12345",
+      "assignedComplaints": {
+        "complaint001": true,
+        "complaint002": true
+      },
+      "createdAt": "2025-03-18T09:00:00Z",
+      "profilePic": "https://link-to-profile-pic.jpg"
+    }
+  },
+  "complaints": {
+    "complaint001": {
+      "userId": "uid123",
+      "userName": "John Doe",
+      "title": "Broken Street Light",
+      "description": "The street light near my house has been broken for 2 weeks.",
+      "status": "pending",
+      "category": "Infrastructure",
+      "location": "123 Main St",
+      "officerId": "officer001",
+      "priority": "high",
+      "attachments": {
+        "0": "https://link-to-photo1.jpg",
+        "1": "https://link-to-photo2.jpg"
+      },
+      "createdAt": "2025-03-18T11:00:00Z",
+      "updatedAt": "2025-03-19T15:00:00Z"
+    }
+  },
+  "notifications": {
+    "notif001": {
+      "recipientId": "uid123",
+      "recipientRole": "user",
+      "title": "Complaint Update",
+      "message": "Your complaint #complaint001 has been resolved.",
+      "type": "complaint_update",
+      "isRead": false,
+      "timestamp": "2025-03-19T16:00:00Z"
+    }
+  }
+}
